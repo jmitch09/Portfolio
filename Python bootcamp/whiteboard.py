@@ -22,6 +22,10 @@ def main():
                 print('yes')
                 mylist = [x*y for x, y in [(2,1),(4,2),(6,3)]]
                 print(mylist)
+        
+        x= 1
+        print("x is {}".format(x))
+        
 
 
 def pHW():
