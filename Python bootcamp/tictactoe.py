@@ -59,11 +59,10 @@ def tic_tac_toe(players,board):
         choices = [' '*9]
         while play:
                 #ask user to select position (store position in list size 9, each index correlates to position on board) authenticate input
-                print('top')
                 choice, play = user_selection(choices)
                 #update player selection list and check if someone has won
-           #     choices = [None]
                 #display new list and say who won or ask next player
+                display_board()
 
                 #After win, ask to play again if yes clear data
 
