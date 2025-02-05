@@ -1,16 +1,17 @@
 
 def initialize():
         p1 = '1'
-        board = {'a':0,'b':1,'c':2,'d':3,'e':4,'f':5,'g':6,'h':7,'i':8}
+        board = {0:'a',1:'b',2:'c',3:'d',4:'e',5:'f',6:'g',7:'h',8:'i'}
+        
+        p1 = input("WELCOME PLAYERS! \n\nPlayer 1, please select X or O: ")
+        p1 = p1.upper()
         while p1 != 'X' and p1 != 'O':
-                p1 = input("WELCOME PLAYERS! \nPlayer 1, please select X or O: ")
-                p1 = p1.upper()
                 # print(p1)
                 # print(p1 == 'X')
                 # print(p1 == 'O')
                 # print(p1 != 'X' and p1 != 'O')
                 if p1 != 'X' and p1 != 'O':
-                        print("Please enter X or O.")
+                        p1 = input("\nPlease enter X or O: ").upper()
 
         if p1 == 'X':
                 players = {'player1' : 'X', 'player2' : 'O'}
@@ -20,7 +21,7 @@ def initialize():
         return players, board
 
 def display_board(board=None,choices=None,choice=None):
-        if board == None:
+        if choice == None:
                 a,b,c,d,e,f,g,h,i = ' ' * 9
         else:
                 #loop indexes of choices
@@ -28,24 +29,43 @@ def display_board(board=None,choices=None,choice=None):
                 #assign letter value at index in list
                 pass
 
-        print("  {}  |  {}  |  {}  ".format(a,b,c))
+        print("\n\n  {}  |  {}  |  {}  ".format(a,b,c))
         print("-----------------")
         print("  {}  |  {}  |  {}  ".format(d,e,f))
         print("-----------------")
         print("  {}  |  {}  |  {}  ".format(g,h,i))
 
-def user_selection():
-        pass
+def user_selection(choices):
+        choice = -1
+        while choice not in range(9) and choice != 'E': 
+                choice = input("\nPlease enter 0-8 or E to end the game: ")
+                if choice.isnumeric():
+                        choice = int(choice)
+                else:
+                        choice = choice.upper()
+                # print(choice)
+                # print(choice not in range(9))
+                # print(choice != 'E')
+                # print(choice not in range(9) and choice != 'E')
+
+        #update choices with X or O at the index if choice is 0-8
+        #return False if E else True
+
+
+        return choice, choices
 
 def tic_tac_toe(players,board):
-        pass
-        #ask user to select position (store position in list size 9, each index correlates to position on board) authenticate input
-        choice = user_selection()
-        #update player selection list and check if someone has won
-        choices = [None]
-        #display new list and say who won or ask next player
+        play = True
+        choices = [' '*9]
+        while play:
+                #ask user to select position (store position in list size 9, each index correlates to position on board) authenticate input
+                print('top')
+                choice, play = user_selection(choices)
+                #update player selection list and check if someone has won
+           #     choices = [None]
+                #display new list and say who won or ask next player
 
-        #After win, ask to play again
+                #After win, ask to play again if yes clear data
 
 def main():
         #game setup (dictionary to remember p1 as x/o and p2 as x/o) dictionary mapping a-i to 0-8
