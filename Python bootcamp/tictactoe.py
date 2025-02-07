@@ -82,9 +82,11 @@ def tic_tac_toe(players,board):
                 #ask user to select position (store position in list size 9, each index correlates to position on board) authenticate input
                 choice, choices = user_selection(choices,players,turn)
                 if choice == 'E':
+                        print("\nThanks for playing. Bye!")
                         return
                 #display new list
-                display_board(board,choices)
+                #display_board(board,choices)
+                display_board()
 
                 if turn == 'player1':
                         turn = 'player2'
