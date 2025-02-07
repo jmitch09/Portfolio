@@ -3,7 +3,7 @@ def initialize():
         p1 = '1'
         board = {0:'a',1:'b',2:'c',3:'d',4:'e',5:'f',6:'g',7:'h',8:'i'}
         
-        p1 = input("WELCOME PLAYERS! \n\nPlayer 1, please select X or O: ")
+        p1 = input("\nWELCOME PLAYERS TO TIC TAC TOE! \n\nPlayer 1, please select X or O: ")
         p1 = p1.upper()
         while p1 != 'X' and p1 != 'O':
                 # print(p1)
@@ -20,8 +20,8 @@ def initialize():
 
         return players, board
 
-def display_board(board=None,choices=None,choice=None):
-        if choice == None:
+def display_board(board=None,choices=None):
+        if choices == None:
                 a,b,c,d,e,f,g,h,i = ' ' * 9
         else:
                 #loop indexes of choices
@@ -35,7 +35,7 @@ def display_board(board=None,choices=None,choice=None):
         print("-----------------")
         print("  {}  |  {}  |  {}  ".format(g,h,i))
 
-def user_selection(choices,turn):
+def user_selection(choices,players,turn):
         choice = -1
         while choice not in range(9) and choice != 'E': 
                 choice = input("\nPlease enter 0-8 or E to end the game: ")
@@ -50,30 +50,63 @@ def user_selection(choices,turn):
 
         #update choices with X or O at the index if choice is 0-8
         #return False if E else True
-        if choice == 'E':
-                return choice, choices, False
+        if choice in range(9):
+                choices[choice] = players[turn]
 
 
-        return choice, choices, True
+        return choice, choices
+
+def check_win(choices,players):
+        pass
+        
+        win = False
+
+        #check choices for win, save X or O to determine winner
+
+        if win == True:
+
+                print("Congratulations {}! You win!\n".format(winner))
+
+
+
+
+        return win
+
 
 def tic_tac_toe(players,board):
         play = True
+        win = False
         choices = [' '*9]
         turn = 'player1'
         while play:
                 #ask user to select position (store position in list size 9, each index correlates to position on board) authenticate input
-                choice, choices, play = user_selection(choices,turn)
-                if play == False:
+                choice, choices = user_selection(choices,players,turn)
+                if choice == 'E':
                         return
-                #update player selection list and check if someone has won
-                #display new list and say who won or ask next player
-                display_board()
+                #display new list
+                display_board(board,choices)
+
                 if turn == 'player1':
                         turn = 'player2'
                 elif turn == 'player2':
                         turn = 'player1'
 
-                #After win, ask to play again if yes clear data else return
+                #check who wins, reset if win and wants to play again else escape
+                win = check_win(choices,players)
+
+                if win == True:
+                        while play2 != 'Y' or play2 != 'N':
+                                play2 = input("Want to play again? (Y/N): ").upper()
+                                if play2 != 'Y' or play2 != 'N':
+                                        print("I don't understand... Please answer Y or N.\n")
+
+                        if play2 == 'Y':
+                                win = False
+                                choices = [' '*9]
+                                turn = 'player1'
+                        else:
+                                return
+
 
 def main():
         #game setup (dictionary to remember p1 as x/o and p2 as x/o) dictionary mapping a-i to 0-8
