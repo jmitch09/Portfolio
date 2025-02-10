@@ -130,7 +130,20 @@ def check_row(i,choices):
                 return choices[i]
         else:
                 return None
+        
 
+# check_tie(choices)
+# check for tie
+def check_tie(choices):
+        """ 
+            input: list of choices
+            output: bool
+        """
+        for choice in choices:
+                if choice == ' ':
+                        return False
+                
+        return True
 
 # check_win(choices,players)
 # inspect tic tac toe board for a win
@@ -159,16 +172,21 @@ def check_win(choices,players):
                 elif choices[2] == choices[4] and choices[2] == choices[6]:
                         r = choices[2]
 
-        if r == 'X' or r == 'O':
+        tie = check_tie(choices)
+
+        if r == 'X' or r == 'O' or tie:
                 win = True
 
         if win == True:
-                if players['player1'] == r:
-                        winner = "Player 1"
+                if tie:
+                        print("\nYou Tied!\n")
                 else:
-                        winner = "Player 2"
+                        if players['player1'] == r:
+                                winner = "Player 1"
+                        else:
+                                winner = "Player 2"
 
-                print("\nCongratulations {}! You win!\n".format(winner))
+                        print("\nCongratulations {}! You win!\n".format(winner))
 
         return win
 
