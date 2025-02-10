@@ -5,7 +5,6 @@ def initialize():
             input: None
             output: dictionaries containing board mappings and player ID
         """
-
         p1 = '1'
         board = {0:'a',1:'b',2:'c',3:'d',4:'e',5:'f',6:'g',7:'h',8:'i'}
         
@@ -30,7 +29,6 @@ def display_board(board=None,choices=None):
             input: board dictionary and a list of choices
             output: None
         """
-
         if choices == None:
                 a,b,c,d,e,f,g,h,i = ' ' * 9
         else:
@@ -68,7 +66,6 @@ def user_selection(choices,players,turn):
             input: list of choices, player ID dictionary, string turn 
             output: int or char choice, list of choices
         """
-
         choice = -1
         while choice not in range(9) and choice != 'E': 
                 choice = input("\nPlease enter 0-8 or E to end the game: ")
@@ -86,6 +83,21 @@ def user_selection(choices,players,turn):
 
 
         return choice, choices
+
+
+# change_turn(turn)
+# change the turn of players
+def change_turn(turn):
+        """ 
+            input: string turn
+            output: string turn
+        """
+        if turn == 'player1':
+                turn = 'player2'
+        elif turn == 'player2':
+                turn = 'player1'
+
+        return turn
 
 
 # check_col(i,choices)
@@ -197,12 +209,8 @@ def tic_tac_toe(players,board):
                 
                 display_board(board,choices)
 
-                if turn == 'player1':
-                        turn = 'player2'
-                elif turn == 'player2':
-                        turn = 'player1'
+                turn = change_turn(turn)
 
-                #check who wins, reset if win and wants to play again else escape
                 win = check_win(choices,players)
 
                 if win == True:
