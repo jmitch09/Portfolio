@@ -25,6 +25,8 @@ def main():
         
         x= 1
         print("x is {}".format(x))
+        print(f"x is {x}")
+        print('a'<'b')
         
 
 
